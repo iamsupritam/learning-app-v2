@@ -1,0 +1,77 @@
+<div id="login-body">
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit();" id="login-form" class="form" action=""
+                            method="post">
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control"
+                                    formControlName="username">
+                                <span
+                                    *ngIf="getPageControls.username.touched && getPageControls.username.errors?.required"
+                                    style="color: red;">Username is required.</span>
+                                <span
+                                    *ngIf="getPageControls.username.touched && getPageControls.username.errors?.minlength"
+                                    style="color: red;">Minimum length of username should be 5.</span>
+                                <span
+                                    *ngIf="getPageControls.username.touched && getPageControls.username.errors?.maxlength"
+                                    style="color: red;">Maximum length of username should be 50.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    formControlName="password">
+                                <span
+                                    *ngIf="getPageControls.password.touched && getPageControls.password.errors?.required"
+                                    style="color: red;">Password is required.</span>
+                                <span
+                                    *ngIf="getPageControls.password.touched && getPageControls.password.errors?.minlength"
+                                    style="color: red;">Minimum length of password should be 5.</span>
+                                <span
+                                    *ngIf="getPageControls.password.touched && getPageControls.password.errors?.maxlength"
+                                    style="color: red;">Maximum length of password should be 20.</span>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+
+                                    </div>
+                                    <div class="col-sm-6" style="text-align: right;">
+                                        <div id="register-link">
+                                            <a href="#" class="text-info">Register here</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="submit" [disabled]="!loginForm.valid" name="submit"
+                                            class="btn btn-info btn-md" value="submit">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-12" style="margin-top: 5px;">
+                                        <div *ngIf="loginErrorMsg.length > 0"
+                                            class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <span id="alertMsg">{{loginErrorMsg}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

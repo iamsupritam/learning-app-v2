@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <strong class="headings">{{tableHeader}}</strong>
+                </div>
+                <div class="col-sm-6" *ngIf="basicConfig.needOperation && basicConfig.operations.isAdd">
+                    <input type="button" class="btn btn-primary flt-rite" value="Add Record">
+                </div>
+            </div>
+            
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            <a class="link" href="#">{{col}}</a>
+                        </th>
+                        <th *ngIf="basicConfig.needOperation">
+                            <div>Operation</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <ng-container *ngIf="(data.length > 0); else lenghtElseBlock"> -->
+                    <tr *ngFor="let row of data ; let isEven = even;"
+                        [class]="isEven ? 'table-info' : 'table-secondary'">
+                        <ng-container *ngFor="let col of columns">
+                            <td *ngIf="isDate(row[col]);else elseBlock">
+                                {{ row[col] | date : 'short' }}
+                            </td>
+                            <ng-template #elseBlock>
+                                <td>
+                                    {{ row[col] }}
+                                </td>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="basicConfig.needOperation">
+                            <td>
+                                <div class="row">
+                                    <div *ngIf="basicConfig.operations.isUpdate" class="inline-button">
+                                        <input type="button" class="btn btn-primary" value="Edit">
+    
+                                    </div>
+                                    <div *ngIf="basicConfig.operations.isDelete" class="inline-button">
+                                        <input type="button" class="btn btn-danger" value="delete" (click)="deleteRecord(row)">
+                                    </div>
+                                </div>
+                            </td>
+                        </ng-container>
+                    </tr>
+                    <!-- </ng-container> -->
+                    <!-- <ng-container #lenghtElseBlock>
+                        <tr>
+                            <td [attr.colspan]="columns?.length">
+                                Data not found!
+                            </td>
+                        </tr>
+                   </ng-container> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
