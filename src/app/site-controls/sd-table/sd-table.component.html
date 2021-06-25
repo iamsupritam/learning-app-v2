@@ -5,26 +5,28 @@
                 <strong class="headings">{{tableHeader}}</strong>
             </div>
             <div class="col-sm-6" *ngIf="basicConfig.needOperation && basicConfig.operations.isAdd">
-                <input type="button" class="btn btn-primary flt-rite" value="Add Record">
+                <input type="button" class="btn btn-primary btn-sm flt-rite" value="Add Record">
             </div>
         </div>
 
     </div>
     <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive table-sm">
             <thead class="table-dark">
                 <tr>
-                    <th *ngFor="let col of columns">
-                        <a class="link" href="#">{{col}}</a>
-                    </th>
-                    <th *ngIf="basicConfig.needOperation">
+                    <td *ngFor="let col of columns" class="table-header">
+                        <a class="link" (click)="sortColumn(col)">
+                            {{col}}
+                        </a>
+                    </td>
+                    <td *ngIf="basicConfig.needOperation" class="table-header">
                         <div>Operation</div>
-                    </th>
+                    </td>
                 </tr>
             </thead>
             <tbody>
                 <!-- <ng-container *ngIf="(data.length > 0); else lenghtElseBlock"> -->
-                <tr *ngFor="let row of data ; let isEven = even;" [class]="isEven ? 'table-info' : 'table-secondary'">
+                <tr *ngFor="let row of data; let isEven = even;" [class]="isEven ? 'table-info' : 'table-secondary'">
                     <ng-container *ngFor="let col of columns">
                         <td *ngIf="isDate(row[col]);else elseBlock">
                             {{ row[col] | date : 'short' }}
@@ -39,11 +41,11 @@
                         <td>
                             <div class="row">
                                 <div *ngIf="basicConfig.operations.isUpdate" class="inline-button">
-                                    <input type="button" class="btn btn-primary" value="Edit">
+                                    <input type="button" class="btn btn-primary btn-sm" value="Edit">
 
                                 </div>
                                 <div *ngIf="basicConfig.operations.isDelete" class="inline-button">
-                                    <input type="button" class="btn btn-danger" value="delete"
+                                    <input type="button" class="btn btn-danger btn-sm" value="delete"
                                         (click)="deleteRecord(row)">
                                 </div>
                             </div>
@@ -59,6 +61,31 @@
                         </tr>
                    </ng-container> -->
             </tbody>
+            <tfoot *ngIf="basicConfig.showFooter">
+                <tr>
+                    <td colspan="100%">
+                        <div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6">
+                                <div class="flt-rite">
+                                    <div class="row">
+                                        <div class="col-sm-6 mt10">
+                                            #Rows
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="rowSelectionId" name="rowSelectionName" (change)="RowsPerPage($event)">
+                                                <option [value]="5">5</option>
+                                                <option selected="select" [value]="10">10</option>
+                                                <option [value]="20">20</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

@@ -1,7 +1,7 @@
 export interface TableConfigModel {
     needOperation: boolean;
     operations: Operation;
-
+    showFooter: boolean;
 }
 
 export interface Operation {

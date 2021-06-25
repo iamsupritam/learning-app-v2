@@ -11,8 +11,13 @@ export class SdTableComponent implements OnInit {
   @Input() data!: any[];
   @Input() basicConfig!: TableConfigModel;
   @Input() tableHeader!: string;
+
   @Output() deleteClickEvent: EventEmitter<any> = new EventEmitter();
+  @Output() rowPerPageChangeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() sortColumnEvent: EventEmitter<any> = new EventEmitter();
+
   columns!: string[];
+  sortedColumn!: string;
 
   constructor() { }
 
@@ -24,8 +29,17 @@ export class SdTableComponent implements OnInit {
     return typeof val.getMonth === 'function';
   }
 
+  sortColumn(currentColumn: string) {
+    this.sortedColumn = currentColumn;
+    this.sortColumnEvent.emit(this.sortedColumn);
+  }
+
   deleteRecord(row: any) {
     this.deleteClickEvent.emit(row);
+  }
+
+  RowsPerPage(e: any){
+    this.rowPerPageChangeEvent.emit(e.target.value);
   }
 
 }

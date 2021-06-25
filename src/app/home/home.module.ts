@@ -5,6 +5,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './product/product.component';
 import { SdModuleModule } from '../site-controls/sd-module.module';
+import { CustomSortPipe } from '../app-pipes/app-pipes/custom-sort.pipe';
+import { AppPipesModule } from '../app-pipes/app-pipes.module';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { SdModuleModule } from '../site-controls/sd-module.module';
     CommonModule,
     HomeRoutingModule,
     HomeRoutingModule,
-    SdModuleModule
+    SdModuleModule,
+    AppPipesModule
   ]
 })
 export class HomeModule { }
