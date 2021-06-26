@@ -5,7 +5,7 @@ import { CustomSortPipe } from 'src/app/app-pipes/app-pipes/custom-sort.pipe';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'] 
 })
 export class ProductComponent implements OnInit {
 
